@@ -1,0 +1,77 @@
+version: "3.8"
+
+services:
+  gateway:
+    container_name: gateway_service
+    build:
+      context: .
+      dockerfile: dockerfiles/gateway.dockerfile
+    depends_on:
+      - shared_db
+      - redis
+    volumes:
+      - ./src/gateway:/app
+      - /app/vendor
+    ports:
+      - "9095:8000"
+    networks:
+      - app
+
+  client:
+    container_name: client_service
+    build:
+      context: .
+      dockerfile: dockerfiles/client.dockerfile
+    depends_on:
+      - shared_db
+      - redis
+    volumes:
+      - ./src/client:/app
+      - /app/vendor
+    networks:
+      - app
+
+  search:
+    container_name: search_service
+    build:
+      context: .
+      dockerfile: dockerfiles/search.dockerfile
+    depends_on:
+      - shared_db
+      - redis
+    volumes:
+      - ./src/search:/app
+      - /app/vendor
+    networks:
+      - app
+
+  shared_db:
+    container_name: client_db
+    image: mysql:8.0
+    environment:
+      MYSQL_DATABASE: challenge_client
+      MYSQL_ROOT_PASSWORD: pass
+    volumes:
+      - db:/var/lib/mysql
+    ports:
+      - "33690:3306"
+    networks:
+      - app
+
+  redis:
+    container_name: redis
+    image: redis:latest
+    restart: always
+    ports:
+      - '63790:6379'
+    healthcheck:
+      test: [ "CMD", "redis-cli", "ping" ]
+    networks:
+      - app
+
+
+networks:
+  app:
+
+volumes:
+  db:

@@ -1,0 +1,129 @@
+{
+	"info": {
+		"_postman_id": "486da36f-2b2c-4c14-a07a-dde2dbe57c63",
+		"name": "api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18858452"
+	},
+	"item": [
+		{
+			"name": "register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "Test User",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "testuser@testify.dev",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "T#ST1o1o@#)",
+							"type": "text"
+						},
+						{
+							"key": "password_confirmation",
+							"value": "T#ST1o1o@#)",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:9095/api/auth/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9095",
+					"path": [
+						"api",
+						"auth",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9095/api/auth/login?email=testuser@testify.dev&password=T%23ST1o1o@%23)",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9095",
+					"path": [
+						"api",
+						"auth",
+						"login"
+					],
+					"query": [
+						{
+							"key": "email",
+							"value": "testuser@testify.dev"
+						},
+						{
+							"key": "password",
+							"value": "T#ST1o1o@#)"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "search",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"accept": true
+				}
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vY2xpZW50OjgwNTUvYXBpL3YxL2NsaWVudC9sb2dpbiIsImlhdCI6MTY2MzM1MDMyNCwiZXhwIjoxNjYzMzUzOTI0LCJuYmYiOjE2NjMzNTAzMjQsImp0aSI6IkFMdFJkcENNSkt2TkROQmMiLCJzdWIiOiIyIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyIsImNsaWVudCI6eyJlbWFpbCI6InRlc3R1c2VyQHRlc3RpZnkuZGV2In19.YDN9rhmUfXjs6QQgs7PFyVYg2kvukagICLEeclE5_bU",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9095/api/search/book?keyword=احمد شاملو",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9095",
+					"path": [
+						"api",
+						"search",
+						"book"
+					],
+					"query": [
+						{
+							"key": "keyword",
+							"value": "احمد شاملو"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
